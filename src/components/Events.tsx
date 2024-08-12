@@ -10,6 +10,7 @@ import {
 } from "./ui/carousel";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { motion } from "framer-motion";
+import AutoScroll from "embla-carousel-auto-scroll";
 
 export default function Events() {
   return (
@@ -73,20 +74,70 @@ export default function Events() {
               </Carousel>
             </div>
           </div>
-          <span className="absolute left-0 border-border border-[0.5px] backdrop-blur-sm rounded-full -rotate-45 -translate-x-80 py-3 border-opacity-25">
-            <marquee scrollamount="30">
-              HIGHLIGHT OF TODAY * HIGHLIGHT OF TODAY * HIGHLIGHT OF TODAY *
-              HIGHLIGHT OF TODAY * HIGHLIGHT OF TODAY * HIGHLIGHT OF TODAY *
-            </marquee>
+          <span className="absolute left-0 border-border border-[0.5px] backdrop-blur-sm rounded-full -rotate-45 -translate-x-[600px] border-opacity-25">
+            <Carousel
+              className="bg-foreground text-background"
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                AutoScroll({
+                  stopOnFocusIn: true,
+                  stopOnInteraction: false,
+                }),
+              ]}
+            >
+              <CarouselContent className="py-4">
+                {highlights?.map((highlights, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="basis-1/4 md:basis-1/5 lg:basis-1/6 text-center"
+                  >
+                    <li className="list-disc">{highlights}</li>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
           </span>
-          <motion.span className="absolute bottom-0 right-0  border-border border-[0.5px] backdrop-blur-sm rounded-full -rotate-45 translate-x-80 py-3 border-opacity-25">
-            <marquee scrollamount="30" direction="right">
-              HIGHLIGHT OF TODAY * HIGHLIGHT OF TODAY * HIGHLIGHT OF TODAY *
-              HIGHLIGHT OF TODAY * HIGHLIGHT OF TODAY * HIGHLIGHT OF TODAY *
-            </marquee>
+          <motion.span className="absolute bottom-0 right-0  border-border border-[0.5px] backdrop-blur-sm rounded-full -rotate-45 translate-x-[600px] border-opacity-25">
+            <Carousel
+              className="bg-foreground text-background"
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              plugins={[
+                AutoScroll({
+                  stopOnFocusIn: true,
+                  stopOnInteraction: false,
+                }),
+              ]}
+            >
+              <CarouselContent className="py-4">
+                {highlights?.map((highlights, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="basis-1/4 md:basis-1/5 lg:basis-1/6 text-center"
+                  >
+                    <li className="list-disc">{highlights}</li>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
           </motion.span>
         </div>
       </MaxWidthWrapper>
     </div>
   );
 }
+
+const highlights = [
+  "HIGHLIGHT OF TODAY *",
+  "HIGHLIGHT OF TODAY *",
+  "HIGHLIGHT OF TODAY *",
+  "HIGHLIGHT OF TODAY *",
+  "HIGHLIGHT OF TODAY *",
+  "HIGHLIGHT OF TODAY *",
+  "HIGHLIGHT OF TODAY *",
+];
